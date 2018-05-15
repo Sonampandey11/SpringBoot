@@ -43,15 +43,13 @@ public class CustomerService {
 
 	public void deleteCustomer(Integer customerId) throws CustomerException
 	{
-      Customer customer=new Customer();
+      
       
 		try {
-			if(customer.getCustomerId().equals(customerId))
-			{
 				customerRepository.deleteById(customerId);
 			}
 			
-		} catch (Exception e) {
+		 catch (Exception e) {
 			throw new CustomerException("Please enter valid customerId ");
 		}
 	}
@@ -59,7 +57,7 @@ public class CustomerService {
 
 	public Customer updateCustomer(Integer customerId) throws CustomerException {
 		Customer customer= new Customer();
-		customer.setCustomerId(31);
+		customer.setCustomerId(30);
 		customer.setCustomerName("sonam");
 		System.out.println(customer);
 		return customerRepository.save(customer);

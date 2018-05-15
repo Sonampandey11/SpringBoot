@@ -73,6 +73,7 @@ public class CustomerController  {
 	public void deleteCustomer(@PathVariable("customerId") final Integer customerId)
 	{
 		try {
+			System.out.println("in controller");
 			service.deleteCustomer(customerId);
 		} catch (CustomerException e) {
 
@@ -86,6 +87,7 @@ public class CustomerController  {
 	{
 		System.out.println(customerId);
 		try {
+			
 			return service.updateCustomer(customerId);
 		} catch (CustomerException e) {
 			// TODO Auto-generated catch block

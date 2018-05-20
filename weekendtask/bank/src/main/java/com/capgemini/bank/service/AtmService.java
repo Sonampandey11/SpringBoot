@@ -1,5 +1,6 @@
 package com.capgemini.bank.service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,43 @@ public class AtmService implements IAtmService {
 	}
 
 	@Override
-	public Atm addMoneyFromBank(Atm atm) {
-		// TODO Auto-generated method stub
-		return null;
+	public Atm addMoneyFromBank(Atm atm, BigDecimal moneyBank) {
+		Optional<Atm> list=atmRepository.findById(atm.getAtmId());
+		Atm atms=null;
+		atm=list.get();
+		Bank bank =new Bank();
+			Optional<Bank> listbank=bankRepository.findById(bank.getBankId());
+			bank=listbank.get();
+			BigDecimal amount=bank.getAmount();
+			BigDecimal total=amount.subtract(moneyBank);
+			if(total.compareTo(BigDecimal.ZERO)>500)
+			{
+				atm.setAmount(moneyBank);
+				bank.setAmount(moneyBank);
+				atms=atmRepository.save(atm);
+				bankRepository.save(bank);
+				
+			}
+		
+		return atms;
+		
 	}
-
-	@Override
-	public Atm withdrawMoney() {
-		// TODO Auto-generated method stub
-		return null;
+ @Override
+	public Atm withdrawMoney(Atm atm, BigDecimal moneyBank) {
+		
+		Optional<Atm> list=atmRepository.findById(atm.getAtmId());
+		Atm atms=list.get();
+		Bank bank= new Bank();
+		BigDecimal data=bank.getAmount();
+		BigDecimal amounts=data.subtract(moneyBank);
+		if(amounts.compareTo(BigDecimal.ZERO)>500)
+		{
+			atms.setAmount(moneyBank);
+			bank.setAmount(amounts);
+		}
+	 return atm;
+				
+		
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.capgemini.bank.service;
 
+import java.math.BigDecimal;
+
 import com.capgemini.bank.model.Atm;
 import com.capgemini.bank.wrapper.AtmWrapper;
 public interface IAtmService {
@@ -13,13 +15,13 @@ public interface IAtmService {
 	 * @author trainee
 	 *
 	 */
-	Atm addMoneyFromBank(Atm atm);
+	Atm addMoneyFromBank(Atm atm, BigDecimal moneyBank);
 
 	/**
 	 * @author trainee
 	 *
 	 */
-	Atm withdrawMoney();
+	Atm withdrawMoney(Atm atm, BigDecimal moneyBank);
 
 
 

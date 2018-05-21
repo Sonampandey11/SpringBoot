@@ -6,4 +6,6 @@ import com.capgemini.bank.model.Bank;
 
 public interface BankRepository extends JpaRepository<Bank, Integer>{
 
+	
+
 }

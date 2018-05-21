@@ -2,6 +2,8 @@ package com.capgemini.bank.controller;
 
 
 import java.util.Optional;
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import com.capgemini.bank.exception.CustomerException;
 import com.capgemini.bank.model.Transaction;
 import com.capgemini.bank.service.TransactionService;
 
+
 /**
  * @author trainee
  *
@@ -20,6 +23,7 @@ import com.capgemini.bank.service.TransactionService;
 @RestController
 @RequestMapping("/transaction")
 public class TransactionController {
+	private static final Logger log = Logger.getLogger(TransactionController.class.getName());
 	@Autowired
 	TransactionService service;
    //generationg details of transaction on basis of transactionId

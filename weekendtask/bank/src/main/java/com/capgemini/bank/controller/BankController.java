@@ -1,6 +1,7 @@
 package com.capgemini.bank.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,17 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.capgemini.bank.exception.CustomerException;
 import com.capgemini.bank.model.Bank;
 import com.capgemini.bank.service.BankService;
 
 
 
+
 @RestController
 @RequestMapping(value="/bank")
 public class BankController {
-	
+	private static final Logger log = Logger.getLogger(BankController.class.getName());
 	@Autowired
 	BankService bankService;
 	

@@ -15,58 +15,65 @@ import com.capgemini.bank.model.Customer;
 import com.capgemini.bank.wrapper.AtmWrapper;
 @Service
 public class AtmService implements IAtmService {
-  
+
 	@Autowired
 	AtmRepository atmRepository;
 	@Autowired
 	BankRepository bankRepository;
-	
+
 	@Override
-	public Atm createAtm(final AtmWrapper atms) {
-		final Optional<Bank> bankOptional=bankRepository.findById(atms.getBankId());
-		Atm atm=atms.getAtm();
-		return atmRepository.save(atm);
+	public Atm createAtm( Atm atms) {
+
+		return atmRepository.save(atms);
 
 	}
 
 	@Override
-	public Atm addMoneyFromBank(Atm atm, BigDecimal moneyBank) {
-		Optional<Atm> list=atmRepository.findById(atm.getAtmId());
-		Atm atms=null;
-		atm=list.get();
-		Bank bank =new Bank();
-			Optional<Bank> listbank=bankRepository.findById(bank.getBankId());
-			bank=listbank.get();
-			BigDecimal amount=bank.getAmount();
-			BigDecimal total=amount.subtract(moneyBank);
-			if(total.compareTo(BigDecimal.ZERO)>500)
-			{
-				atm.setAmount(moneyBank);
-				bank.setAmount(moneyBank);
-				atms=atmRepository.save(atm);
-				bankRepository.save(bank);
-				
-			}
-		
-		return atms;
-		
-	}
- @Override
-	public Atm withdrawMoney(Atm atm, BigDecimal moneyBank) {
-		
-		Optional<Atm> list=atmRepository.findById(atm.getAtmId());
+	public Atm addMoneyFromBank(final Integer atmId, final BigDecimal money,final  Integer bankId) {
+
+		final Optional<Atm> list=atmRepository.findById(atmId);
+		System.out.println(">>>>>>>>>>>>>>"+atmId);
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<"+list);
 		Atm atms=list.get();
-		Bank bank= new Bank();
-		BigDecimal data=bank.getAmount();
-		BigDecimal amounts=data.subtract(moneyBank);
+		final Optional<Bank> listbank=bankRepository.findById(bankId);
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<"+listbank);
+
+		final Bank bank=listbank.get();
+		final BigDecimal amount=bank.getAmount();
+		final BigDecimal total=amount.subtract(money);
+		if(total.compareTo(BigDecimal.ZERO)>500)
+		{
+			atms.setAmount(amount);
+			bank.setAmount(total);
+			atms=atmRepository.save(atms);
+			bankRepository.save(bank);
+
+		}
+		else
+		{
+			System.out.println("Please enter correct amount");
+		}
+
+		return atms;
+
+	}
+	@Override
+	public Atm withdrawMoney(final Integer atmId,final BigDecimal moneyBank,final Integer bankId) {
+
+		final Optional<Atm> list=atmRepository.findById(atmId);
+		final Atm atms=list.get();
+		final Optional<Bank> listBank=bankRepository.findById(bankId);
+		final Bank bank=listBank.get();
+		final BigDecimal money=bank.getAmount();
+		final BigDecimal amounts=money.subtract(moneyBank);
 		if(amounts.compareTo(BigDecimal.ZERO)>500)
 		{
 			atms.setAmount(moneyBank);
 			bank.setAmount(amounts);
 		}
-	 return atm;
-				
-		
+		return atms;
+
+
 	}
 
 }

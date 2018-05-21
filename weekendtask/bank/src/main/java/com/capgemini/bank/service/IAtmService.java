@@ -10,18 +10,18 @@ public interface IAtmService {
 	 * method: to createAtm on
 	 * 
 	 */
-	Atm createAtm(AtmWrapper atm);
+	Atm createAtm(Atm atm);
 	/**
 	 * @author trainee
 	 *
 	 */
-	Atm addMoneyFromBank(Atm atm, BigDecimal moneyBank);
+	Atm addMoneyFromBank(Integer atmId, BigDecimal moneyBank,Integer bankId);
 
 	/**
 	 * @author trainee
 	 *
 	 */
-	Atm withdrawMoney(Atm atm, BigDecimal moneyBank);
+	Atm withdrawMoney(Integer atmId, BigDecimal moneyBank,Integer bankId);
 
 
 

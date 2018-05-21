@@ -12,14 +12,14 @@ public class Account {
 	@GeneratedValue
 	private Integer accountId;
 	private BigDecimal amount;
-	
+
 	@ManyToOne(targetEntity=Bank.class)
 	private Bank bank;
-	
+
 	@ManyToOne(targetEntity=Customer.class)
 	private Customer customer;
-	
-	
+
+
 	/**
 	 * @return the accountId
 	 */
@@ -32,7 +32,7 @@ public class Account {
 	public void setAccountId(Integer accountId) {
 		this.accountId = accountId;
 	}
-	
+
 	/**
 	 * @return the amount
 	 */
@@ -45,21 +45,21 @@ public class Account {
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	
+
 	/**
 	 * @param accountId
 	 * @param customerId
 	 * @param amount
 	 * @param bankId
 	 */
-	public Account(Integer accountId, Integer customerId, BigDecimal amount) {
+	public Account(final Integer accountId, final Integer customerId, final BigDecimal amount) {
 		this.accountId = accountId;
 		this.amount = amount;
-		
+
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -72,21 +72,21 @@ public class Account {
 	/**
 	 * @param bank the bank to set
 	 */
-	public void setBank(Bank bank) {
+	public void setBank(final Bank bank) {
 		this.bank = bank;
 	}
 	/**
 	 * @param customer the customer to set
 	 */
-	public void setCustomer(Customer customer) {
+	public void setCustomer(final Customer customer) {
 		this.customer = customer;
 	}
 	/**
 	 * 
 	 */
 	public Account() {
-		
+
 	}
-	
+
 
 }

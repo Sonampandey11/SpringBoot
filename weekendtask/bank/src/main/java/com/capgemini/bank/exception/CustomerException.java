@@ -1,6 +1,6 @@
 package com.capgemini.bank.exception;
 
-public class CustomerException extends Exception{
+public class CustomerException extends RuntimeException{
 
 	/**
 	 * @param message

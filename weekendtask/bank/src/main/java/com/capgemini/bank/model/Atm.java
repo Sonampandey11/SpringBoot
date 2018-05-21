@@ -15,6 +15,7 @@ public class Atm {
 	private Integer atmId;
 	@Column(name="amount")
 	private BigDecimal amount;
+	
 	/**
 	 * @return the atmId
 	 */
@@ -24,7 +25,7 @@ public class Atm {
 	/**
 	 * @param atmId the atmId to set
 	 */
-	public void setAtmId(Integer atmId) {
+	public void setAtmId(final Integer atmId) {
 		this.atmId = atmId;
 	}
 	/**
@@ -36,7 +37,7 @@ public class Atm {
 	/**
 	 * @param amount the amount to set
 	 */
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(final BigDecimal amount) {
 		this.amount = amount;
 	}
 	/* (non-Javadoc)
@@ -46,9 +47,12 @@ public class Atm {
 	public String toString() {
 		return "Atm [atmId=" + atmId + ", amount=" + amount + "]";
 	}
+
+	
 	/**
-	 * 
+	 * @return the bank
 	 */
+
 	public Atm() {
 		
 	}
@@ -56,7 +60,7 @@ public class Atm {
 	 * @param atmId
 	 * @param amount
 	 */
-	public Atm(Integer atmId, BigDecimal amount) {
+	public Atm(final Integer atmId, final BigDecimal amount) {
 		this.atmId = atmId;
 		this.amount = amount;
 	}

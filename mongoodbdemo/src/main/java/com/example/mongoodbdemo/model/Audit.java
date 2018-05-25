@@ -15,7 +15,7 @@ public class Audit {
 	private String eventName;
 	private String eventType;
 	private LocalDateTime eventDate;
-	private String userId;
+	private Integer userId;
     private Object oldValue;
     private Object newValue;
 	/**
@@ -69,13 +69,13 @@ public class Audit {
 	/**
 	 * @return the userId
 	 */
-	public String getUserId() {
+	public  Integer getUserId() {
 		return userId;
 	}
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(String userId) {
+	public void setUserId( Integer userId) {
 		this.userId = userId;
 	}
 	/**
@@ -105,12 +105,15 @@ public class Audit {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
-		return "Audit [eventId=" + eventId + ", eventName=" + eventName + ", eventType=" + eventType + ", eventDate="
-				+ eventDate + ", userId=" + userId + ", oldValue=" + oldValue + ", newValue=" + newValue + "]";
+	
+	/**
+	 * 
+	 */
+	public Audit() {
+	
 	}
 	/**
+	 * @param eventId
 	 * @param eventName
 	 * @param eventType
 	 * @param eventDate
@@ -118,8 +121,9 @@ public class Audit {
 	 * @param oldValue
 	 * @param newValue
 	 */
-	public Audit(String eventName, String eventType, LocalDateTime eventDate, String userId,
+	public Audit( String eventName, String eventType, LocalDateTime eventDate, Integer userId,
 			Object oldValue, Object newValue) {
+		this.eventId = eventId;
 		this.eventName = eventName;
 		this.eventType = eventType;
 		this.eventDate = eventDate;
@@ -127,11 +131,13 @@ public class Audit {
 		this.oldValue = oldValue;
 		this.newValue = newValue;
 	}
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
-	public Audit() {
-	
+	@Override
+	public String toString() {
+		return "Audit [eventId=" + eventId + ", eventName=" + eventName + ", eventType=" + eventType + ", eventDate="
+				+ eventDate + ", userId=" + userId + ", oldValue=" + oldValue + ", newValue=" + newValue + "]";
 	}
 	
     

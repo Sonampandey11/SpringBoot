@@ -28,11 +28,11 @@ public class AuditTest {
 	@InjectMocks
 	AuditServiceImpl service;
 
-	//@Test
+	@Test
 	public void createAuditTest() throws AuditException
 	{
 		LocalDateTime today = LocalDateTime.now();
-		Audit audit=new Audit("crud","local",today,"45",new Object(),new Object());
+		Audit audit=new Audit("crud","local",today,4,new Object(),new Object());
 		System.out.println(audit);
 		Mockito.when(auditRepository.save(audit)).thenReturn(audit);
 		//service.createAudit(audit);
@@ -41,13 +41,13 @@ public class AuditTest {
 
 
 
-	//@Test
+	@Test
 	public void viewDetailsByIdTest() throws AuditException
 	{
 		LocalDateTime today = LocalDateTime.now();
 		Object ob=new Object();
 		Object ob2=new Object();
-		Audit audit=new Audit("crud","local",today,"45",new Object(),new Object());
+		Audit audit=new Audit("crud","local",today,45,new Object(),new Object());
 		Optional<Audit> obj=Optional.of(audit);
 		Mockito.when(auditRepository.findById(Mockito.any(UUID.class))).thenReturn(obj);
 		UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
@@ -57,10 +57,10 @@ public class AuditTest {
 	}
 
 
-	//@Test
+	@Test
 	public void updateAudit() {
 		LocalDateTime today = LocalDateTime.now();
-		Audit audit=new Audit("crud","local",today,"45",new Object(),new Object());
+		Audit audit=new Audit("crud","local",today,45,new Object(),new Object());
 		Optional<Audit> obj=Optional.of(audit);
 		//when(service.updateAudit(eventId, eventName))
 
@@ -70,17 +70,16 @@ public class AuditTest {
 
 		//when(auditRepository.findById(Mockito.any(UUID.class))).thenReturn(obj);
 
-		/*assertEquals(service.updateAudit(obj.), eventName)
-		 * 
+		//assertEquals(service.updateAudit(obj.), eventName);
 }
-		 */
-	}
+		 
+	
 
 	@Test
 	public void deleteAuditTest() throws AuditException
 	{
 		LocalDateTime today = LocalDateTime.now();
-		Audit audit=new Audit("crud","local",today,"45",new Object(),new Object());
+		Audit audit=new Audit("crud","local",today,45,new Object(),new Object());
 		UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
 		Optional<Audit> obj=Optional.of(audit);
 		when(auditRepository.findById(uid)).thenReturn(obj);
@@ -89,5 +88,26 @@ public class AuditTest {
 
 
 	}
+
+	@Test
+	public void testcreateAuditNegative() throws AuditException
+	{
+		Audit audit=null;
+		Mockito.when(auditRepository.save(audit)).thenReturn(audit);
+		Audit Obj= service.createAudit(audit);
+	}
+	
+	@Test
+	public void testUpdate() throws AuditException
+	{
+		Optional<Audit> audit=Optional.empty();
+		UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+		when(auditRepository.findById(uid)).thenReturn(audit);
+		//Audit object=service.updateAudit(uid, "abc");
+		
+	}
+
+
+
 
 }

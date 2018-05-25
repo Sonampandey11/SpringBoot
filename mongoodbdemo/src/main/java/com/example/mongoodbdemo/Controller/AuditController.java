@@ -28,6 +28,7 @@ public class AuditController {
 	public ResponseEntity<Audit> createAudit(final @RequestBody Audit audit) throws AuditException
 	{
 
+		System.out.println("M2 Service >>>>>>" + audit);
 		try
 		{
 			final Audit  auditObj=auditService.createAudit(audit) ;

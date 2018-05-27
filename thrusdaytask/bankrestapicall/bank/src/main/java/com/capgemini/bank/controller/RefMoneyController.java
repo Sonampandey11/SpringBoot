@@ -21,9 +21,10 @@ public class RefMoneyController {
 	@PostMapping(value="/money")
 	public ResponseEntity<RefMoney> createDenominationMoney(@RequestBody RefMoney refmoney)
 	{
-		RefMoney object= service.createDenominationMoney(refmoney);
-		System.out.println("value    is>>>>>>>>"+object);
-		return new ResponseEntity<RefMoney>(object, HttpStatus.CREATED);
+		return null;
+		//RefMoney object= service.createDenominationMoney(refmoney);
+	//	System.out.println("value    is>>>>>>>>"+object);
+		//return new ResponseEntity<RefMoney>(object, HttpStatus.CREATED);
 	}
 	
 }

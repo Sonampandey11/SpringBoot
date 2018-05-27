@@ -64,10 +64,20 @@ public class BankDenominationTable extends BaseEntity {
 		this.bankId = bankId;
 	}
 	/**
+	 * @param bankId2 
+	 * @param i 
+	 * @param bigDecimal 
 	 * 
 	 */
-	public BankDenominationTable() {
-
+	public BankDenominationTable(Integer bankId, Integer noOfDenom, BigDecimal denominationAmount) {
+		super();
+		this.bankId = bankId;
+		this.noOfDenom = noOfDenom;
+		this.denominationAmount = denominationAmount;
+	
 	}
+	public BankDenominationTable() {
+	}
+	
 
 }

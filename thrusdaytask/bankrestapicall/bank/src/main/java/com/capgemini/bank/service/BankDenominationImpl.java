@@ -2,6 +2,7 @@ package com.capgemini.bank.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -9,12 +10,14 @@ import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.amqp.RabbitProperties.AmqpContainer;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.bank.dao.BankDenominationRepository;
 import com.capgemini.bank.exception.CustomerException;
 import com.capgemini.bank.model.BankDenominationTable;
 import com.capgemini.bank.model.RefMoney;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 @Service
 public class BankDenominationImpl implements BankDenomination {
 
@@ -74,4 +77,40 @@ public class BankDenominationImpl implements BankDenomination {
 
 	}
 
+
+	@Override
+	public Map<BigDecimal, Integer> withdrawDenomination(BigDecimal amount, List<BigDecimal> money) {
+		// TODO Auto-generated method stub
+		Map<BigDecimal,Integer>  result = new HashMap<BigDecimal , Integer>();
+		List<BigDecimal> list=new ArrayList<>();
+		for(BigDecimal value:list)
+		{
+			if(value.compareTo(amount)<=0)
+			{
+				list.add(value);
+		}
+			else
+			{
+				System.out.println("Invalid amount");
+			}
+		}
+		for(int num=0; num<=list.size();num++)
+		{
+			BigDecimal denomination=Collections.max(list);
+			Integer count=amount.divide(denomination).intValue();
+			amount=amount.remainder(denomination);
+			result.put(denomination, count);
+			if(amount.compareTo(BigDecimal.ZERO) == 0) {
+				break;
+			}
+			list.remove(denomination);
+		}
+		if(amount.compareTo(BigDecimal.ZERO) != 0) {
+			//System.out.println("cant convert");
+			throw new CustomerException("Value entered is not compatible");
+		}
+		
+		return result;
+	}
+	
 }

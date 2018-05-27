@@ -1,5 +1,8 @@
 package com.capgemini.bank.service;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +15,33 @@ import com.capgemini.bank.model.RefMoney;
 public class RefMoneyService {
 	@Autowired
 	RefMoneyRepository repository;
-	public RefMoney createDenominationMoney(RefMoney refmoney)
+	public void createDenominationMoney(List<BigDecimal> refMoney)
 	{
-		try {
-			System.out.println("Value in service"+refmoney);
-			return repository.save(refmoney);
-		} catch (CustomerException exception ) {
+		for(BigDecimal denomination:refMoney)
+		{
+		if(!repository.findById(denomination).isPresent())
+		{
+			RefMoney money=new RefMoney();
+			money.setDenomination(denomination);
+			repository.save(money);
 			
-			throw new CustomerException("refMoney cannot be null");
 		}
+		else
+		{
+			throw new CustomerException("invalid amount");
+		}
+	}
+	}
+		
+	public List<RefMoney> fetchAllDenomination()
+	{
+		List<RefMoney> list=repository.findAll();
+		if(list.isEmpty())
+		{
+			System.out.println("invalid input");
+		}
+	
+		return list;
 		
 	}
 	

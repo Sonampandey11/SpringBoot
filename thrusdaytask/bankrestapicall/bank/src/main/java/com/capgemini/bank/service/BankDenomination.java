@@ -11,5 +11,6 @@ public interface BankDenomination {
 	
 
 	Map<BigDecimal, Integer> createDenomination(BigDecimal amount,List<RefMoney> money);
+	Map<BigDecimal,Integer> withdrawDenomination(BigDecimal amount,List<BigDecimal> money);
 
 }

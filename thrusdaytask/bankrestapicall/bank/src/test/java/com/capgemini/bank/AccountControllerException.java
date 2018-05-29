@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+
 import com.capgemini.bank.dao.AccountRepository;
 import com.capgemini.bank.dao.BankRepository;
 import com.capgemini.bank.dao.CustomerRepository;
@@ -23,7 +23,7 @@ import com.capgemini.bank.service.AccountService;
 import com.capgemini.bank.service.BankServiceImpl;
 import com.capgemini.bank.service.CustomerService;
 import com.capgemini.bank.wrapper.AccountRequirement;
-@RunWith(MockitoJUnitRunner.class)
+
 public class AccountControllerException {
 
 	@Mock
@@ -57,8 +57,8 @@ public class AccountControllerException {
 		
 		final AccountRequirement requirement=new AccountRequirement(account,1,1,"AxisBank","Sonam Pandey");
 		
-		when(bankRepository.findById(Mockito.any(Integer.class))).thenReturn(bankObj);
-		when(customerRepository.findById(Mockito.any(Integer.class))).thenReturn(customerObject);
+		//when(bankRepository.findById(Mockito.any(Integer.class))).thenReturn(bankObj);
+		//when(customerRepository.findById(Mockito.any(Integer.class))).thenReturn(customerObject);
 		when(accountRepository.save(account)).thenReturn(account);
 		
 		assertThat(accountService.createAccount(requirement)).isNotNull(); 

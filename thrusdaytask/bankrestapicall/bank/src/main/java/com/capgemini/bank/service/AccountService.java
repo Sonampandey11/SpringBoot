@@ -30,17 +30,20 @@ public class AccountService implements IAccount{
 	BankRepository bankRepository;
 	@Autowired
 	CustomerRepository customerRepository;
-
+	@Autowired
+	BankDenominationCall bankDenominationCall;
 	@Autowired
 	ITransaction txnService;
-	
+	@Autowired
+	BankService bankService;
+
 	/*@Autowired
 	RefMoney money;
-	*/
+	 */
 
 	@Autowired
 	BankDenominationImpl bankDenominationImpl;
-	
+
 	@Autowired
 	BankDenominationRepository denominationRepository;
 	/**
@@ -52,9 +55,9 @@ public class AccountService implements IAccount{
 	@Override
 	public Account createAccount(final AccountRequirement acccount) {
 
-		final Optional<Bank> bankOpt = bankRepository.findById(acccount.getBankId());
+		final Optional<Bank> bankOpt = bankRepository.findByBankId(acccount.getBankId());
 		final Bank bank = bankOpt.get();
-		final Optional<Customer> customerOpt = customerRepository.findById(acccount.getCustomerId());
+		final Optional<Customer> customerOpt = customerRepository.findByCustomerId(acccount.getCustomerId());
 		final Customer cust = customerOpt.get();
 		final Account account = acccount.getAccount();
 		account.setBank(bank);
@@ -62,7 +65,7 @@ public class AccountService implements IAccount{
 		accountRepository.save(account);
 		return account;	
 	}
-	
+
 	/**
 	 * method name: to deposit money in bank and account 
 	 * description: to deposit money we will fetch accountId from Account and check if accountId i
@@ -73,29 +76,31 @@ public class AccountService implements IAccount{
 	@Override
 	public String depositMoney(final AccountDeposit deposit,BankDenominationTable table) {
 		System.out.println("Add Money"+deposit);
-		final Optional<Account> accountOptional=accountRepository.findById(deposit.getAccountId());
+		final Optional<Account> accountOptional=accountRepository.findByAccountId(deposit.getAccountId());
 
 		if(accountOptional.isPresent())
 		{
-		
+
 			final Account accounts=accountOptional.get();
 			BigDecimal balance=accounts.getAmount(); 
 			balance=balance.add(deposit.getAmount());
 			accounts.setAmount(balance);
 			accountRepository.save(accounts);
-			final Optional<Bank> bank=bankRepository.findById(deposit.getBankId());
+			final Optional<Bank> bank=bankRepository.findByBankId(deposit.getBankId());
 			final Bank banks=bank.get();
-			final Optional<BankDenominationTable> bankDenom=denominationRepository.findById(table.getNoOfDenom());
+			final Optional<BankDenominationTable> bankDenom=denominationRepository.findBynoOfDenom(table.getNoOfDenom());
 			final BankDenominationTable object=bankDenom.get();
-		
-			banks.setAmount(balance);
+            banks.setAmount(balance);
+            bankService.createBank(banks);
+           bankDenominationCall.bankDenominationDeposit(accounts.getAmount(), accounts.getAccountId());
+
 			//denominationList = bankDenominationImpl.noOfDenomination();
 			//bankDenominationImpl.createDenomination(deposit.getAmount(), denominationList);
-		
+
 			
-			
+
 			bankRepository.save(banks);
-			final Optional<Customer> customer =customerRepository.findById(deposit.getCustomerId());
+			final Optional<Customer> customer =customerRepository.findByCustomerId(deposit.getCustomerId());
 			txnService.createTransaction(customer.get(), accounts, deposit.getAmount(), "CREDIT");
 		}
 		else
@@ -110,7 +115,7 @@ public class AccountService implements IAccount{
 	@Override
 	public Account getAccountDetails(Integer accountId) {
 		System.out.println("AccountId"+accountId);
-		Optional<Account> account=accountRepository.findById(accountId);
+		Optional<Account> account=accountRepository.findByAccountId(accountId);
 		if(account.isPresent())
 		{
 			Account acc=accountRepository.getOne(accountId);
@@ -124,7 +129,7 @@ public class AccountService implements IAccount{
 
 	@Override
 	public String withdrawMoney(BigDecimal amount, AccountWithdraw accountWithdraw) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		return null;
 	}
 

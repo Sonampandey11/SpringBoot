@@ -31,11 +31,11 @@ public class AtmService implements IAtmService {
 	@Override
 	public Atm addMoneyFromBank(final Integer atmId, final BigDecimal money,final  Integer bankId) {
 
-		final Optional<Atm> list=atmRepository.findById(atmId);
+		final Optional<Atm> list=atmRepository.findByAtmId(atmId);
 		System.out.println(">>>>>>>>>>>>>>"+atmId);
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<"+list);
 		Atm atms=list.get();
-		final Optional<Bank> listbank=bankRepository.findById(bankId);
+		final Optional<Bank> listbank=bankRepository.findByBankId(bankId);
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<"+listbank);
 
 		final Bank bank=listbank.get();
@@ -60,9 +60,9 @@ public class AtmService implements IAtmService {
 	@Override
 	public Atm withdrawMoney(final Integer atmId,final BigDecimal moneyBank,final Integer bankId) {
 
-		final Optional<Atm> list=atmRepository.findById(atmId);
+		final Optional<Atm> list=atmRepository.findByAtmId(atmId);
 		final Atm atms=list.get();
-		final Optional<Bank> listBank=bankRepository.findById(bankId);
+		final Optional<Bank> listBank=bankRepository.findByBankId(bankId);
 		final Bank bank=listBank.get();
 		final BigDecimal money=bank.getAmount();
 		final BigDecimal amounts=money.subtract(moneyBank);

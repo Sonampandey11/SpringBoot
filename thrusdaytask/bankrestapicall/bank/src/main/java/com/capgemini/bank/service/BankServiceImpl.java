@@ -55,7 +55,7 @@ public class BankServiceImpl implements BankService{
 	}
 	//Optional<Bank> bankDetails=bankRepository.findById(bankId);
 	try {
-		return bankRepository.findById(bankId).get();
+		return bankRepository.findByBankId(bankId).get();
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		throw new CustomerException("bankId is not valid");

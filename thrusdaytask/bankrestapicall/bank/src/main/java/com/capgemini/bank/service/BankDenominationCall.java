@@ -5,18 +5,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.capgemini.bank.dao.BankDenominationRepository;
-import com.capgemini.bank.dao.BankRepository;
 import com.capgemini.bank.exception.CustomerException;
 import com.capgemini.bank.model.Bank;
 import com.capgemini.bank.model.BankDenominationTable;
 import com.capgemini.bank.model.RefMoney;
-
+@Service
 public class BankDenominationCall {
 	
 	
@@ -28,6 +27,7 @@ public class BankDenominationCall {
 	BankServiceImpl bankService;
 	@Autowired
 	RefMoneyService refMoneyService;
+
 	
 	public void createBankDeom(List<BigDecimal>list, Integer bankId) throws CustomerException
 	{
@@ -56,7 +56,7 @@ public class BankDenominationCall {
 			 Map.Entry<BigDecimal, Integer> entry = iterator.next();
 			    BigDecimal value = entry.getKey();
 			    Integer count=entry.getValue();	
-			    Optional<BankDenominationTable> banktable=bankdeminationRepository.findById(value.intValue());
+			    Optional<BankDenominationTable> banktable=bankdeminationRepository.findBynoOfDenom(value.intValue());
 			    BankDenominationTable denomination=banktable.get();
 			    Bank bank=bankService.getBankDetailsById(bankId);
 			    denomination.setBankId(bankId);
@@ -87,7 +87,7 @@ public class BankDenominationCall {
 			 Map.Entry<BigDecimal, Integer> entry = iterator.next();
 			    BigDecimal value = entry.getKey();
 			    Integer count=entry.getValue();	
-			    Optional<BankDenominationTable> banktable=bankdeminationRepository.findById(value.intValue());
+			    Optional<BankDenominationTable> banktable=bankdeminationRepository.findBynoOfDenom(value.intValue());
 			    BankDenominationTable denomination=banktable.get();
 			    Bank bank=bankService.getBankDetailsById(bankId);
 			    denomination.setBankId(bankId);

@@ -8,11 +8,7 @@ import com.capgemini.bank.model.AuditEnum;
 
 @Service
 public class AuditServiceTemplate {
-	public static void main(String[] args) {
 		
-	}
-	
-	
 	public Audit createAuditServiceImpl(Audit audit)
 	{
 		RestTemplate template =new RestTemplate();
@@ -22,6 +18,5 @@ public class AuditServiceTemplate {
 		return Object;
 		
 	}
-	
 
 }

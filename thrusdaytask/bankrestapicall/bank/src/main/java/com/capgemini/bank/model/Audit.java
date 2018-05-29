@@ -1,6 +1,6 @@
 package com.capgemini.bank.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -12,7 +12,7 @@ public class Audit {
 	
 	private String eventName;
 	private String eventType;
-	private LocalDateTime eventDate;
+	private Date eventDate;
 	private Integer userId;
     private Object oldValue;
     private Object newValue;
@@ -55,13 +55,13 @@ public class Audit {
 	/**
 	 * @return the eventDate
 	 */
-	public LocalDateTime getEventDate() {
+	public Date getEventDate() {
 		return eventDate;
 	}
 	/**
 	 * @param eventDate the eventDate to set
 	 */
-	public void setEventDate(LocalDateTime eventDate) {
+	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
 	}
 	/**
@@ -124,7 +124,7 @@ public class Audit {
 	 * @param oldValue
 	 * @param newValue
 	 */
-	public Audit( String eventName, String eventType, LocalDateTime eventDate, Integer userId,
+	public Audit( String eventName, String eventType, Date eventDate, Integer userId,
 			Object oldValue, Object newValue) {
 		this.eventId = eventId;
 		this.eventName = eventName;

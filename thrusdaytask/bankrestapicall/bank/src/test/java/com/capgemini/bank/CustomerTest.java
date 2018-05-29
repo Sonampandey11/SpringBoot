@@ -11,13 +11,15 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+
+import org.springframework.test.context.junit4.SpringRunner;
+
 import com.capgemini.bank.dao.CustomerRepository;
 import com.capgemini.bank.exception.CustomerException;
 import com.capgemini.bank.model.Bank;
 import com.capgemini.bank.model.Customer;
 import com.capgemini.bank.service.CustomerService;
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class CustomerTest {
 
 	@InjectMocks
@@ -50,7 +52,7 @@ public class CustomerTest {
 			Bank bank=new Bank(1,"Sbi","airoli",amount);
 			final Customer customer = new Customer(1,"Sonam",452,bank);
 			final Optional<Customer> object=Optional.of(customer);
-			Mockito.when(repository.findById(Mockito.any(Integer.class))).thenReturn(object);
+			//Mockito.when(repository.findById(Mockito.any(Integer.class))).thenReturn(object);
 			assertThat(service.getCustomerDetailsById(1)).isNotNull();	
 			
 		}

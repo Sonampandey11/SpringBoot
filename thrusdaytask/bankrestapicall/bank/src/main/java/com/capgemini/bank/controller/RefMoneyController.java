@@ -15,7 +15,7 @@ import com.capgemini.bank.service.RefMoneyService;
 @RequestMapping(value="/ref")
 public class RefMoneyController {
 
-	@Autowired
+/*	@Autowired
 	RefMoneyService service;
 	
 	@PostMapping(value="/money")
@@ -25,6 +25,6 @@ public class RefMoneyController {
 		//RefMoney object= service.createDenominationMoney(refmoney);
 	//	System.out.println("value    is>>>>>>>>"+object);
 		//return new ResponseEntity<RefMoney>(object, HttpStatus.CREATED);
-	}
+	}*/
 	
 }

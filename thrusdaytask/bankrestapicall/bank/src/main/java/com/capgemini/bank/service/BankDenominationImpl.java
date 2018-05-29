@@ -10,14 +10,13 @@ import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties.AmqpContainer;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.bank.dao.BankDenominationRepository;
 import com.capgemini.bank.exception.CustomerException;
 import com.capgemini.bank.model.BankDenominationTable;
 import com.capgemini.bank.model.RefMoney;
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
+
 @Service
 public class BankDenominationImpl implements BankDenomination {
 

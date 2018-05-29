@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.capgemini.bank.dao.BankDenominationRepository;
 import com.capgemini.bank.dao.RefMoneyRepository;
 import com.capgemini.bank.exception.CustomerException;
 import com.capgemini.bank.model.RefMoney;
@@ -19,7 +17,7 @@ public class RefMoneyService {
 	{
 		for(BigDecimal denomination:refMoney)
 		{
-		if(!repository.findById(denomination).isPresent())
+		if(!repository.findBydenomination(denomination).isPresent())
 		{
 			RefMoney money=new RefMoney();
 			money.setDenomination(denomination);

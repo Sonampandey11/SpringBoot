@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.Commit;
-//@Component
-//public class CustomerFilter implements Filter{
+@Component
+public class CustomerFilter implements Filter{
 
-	/*@Override
+	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		System.out.println("init service call");
 		
@@ -38,7 +38,5 @@ import org.springframework.test.annotation.Commit;
 	public void destroy() {
 		System.out.println("destroy service call");
 		
-	}*/
-
-//
-	//}
+	}
+}

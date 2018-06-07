@@ -1,7 +1,7 @@
 package com.example.springsecurityproject.config;
 
 import javax.servlet.Filter;
-
+import com.example.springsecurityproject.entity.CustomerFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,20 +19,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	{
 		httpSecurity.authorizeRequests()
 		.antMatchers("/hello/security").hasRole("USER")
-		.anyRequest()//.permitAll()
-		.fullyAuthenticated()
+		.anyRequest().permitAll()
+		//.fullyAuthenticated()
 		.and()
-		//.addFilterBefore(CustomerFilter(), BasicAuthenticationFilter.class)
+		.addFilterBefore(CustomerFilter(), BasicAuthenticationFilter.class)
 		.httpBasic();
 
 		httpSecurity.csrf().disable();
 	}
 	
-	/*@Bean
+	@Bean
 	public CustomerFilter CustomerFilter() {
 
-		return CustomerFilter();
-	}*/
+		return new  CustomerFilter();
+	}
 	@Override
 	protected void configure(AuthenticationManagerBuilder builder) throws Exception
 	{

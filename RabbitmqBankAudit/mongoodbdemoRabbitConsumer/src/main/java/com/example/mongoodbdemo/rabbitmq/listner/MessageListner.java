@@ -25,7 +25,7 @@ public class MessageListner {
 		AuditMessage value = null;
 
 		try {
-			System.out.println("Message Number " + MessageListner.fromJsonToJava(message, AuditMessage.class) + " received.");
+			System.out.println("Message Number " + MessageListner.fromJsonToJava(message, Audit.class) + " received.");
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,6 +3,7 @@ package com.capgemini.bank.model;
 import java.util.Date;
 import java.util.UUID;
 
+import org.springframework.data.annotation.Id;
 
 public class Audit {
 	

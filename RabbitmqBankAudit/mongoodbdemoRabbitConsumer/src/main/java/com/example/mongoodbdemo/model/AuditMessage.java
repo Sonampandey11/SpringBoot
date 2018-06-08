@@ -3,9 +3,9 @@ package com.example.mongoodbdemo.model;
 import java.util.Date;
 import java.util.UUID;
 
-
 public class AuditMessage {
-	
+
+
 	private UUID eventId = UUID.randomUUID();
 	
 	private String eventName;
@@ -135,6 +135,4 @@ public class AuditMessage {
 	
 	
 	
-    
-
 }
